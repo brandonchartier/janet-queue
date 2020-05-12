@@ -1,4 +1,11 @@
-(import ../queue)
+# Janet Queue
+
+`jpm install https://github.com/brandonchartier/janet-queue`
+
+---
+
+```
+(import queue)
 
 (def *queue* (queue/new))
 
@@ -26,3 +33,4 @@
 (def d (queue/dequeue *queue*))
 (assert (deep= d nil))
 (assert (deep= *queue* @{:size 0}))
+```
