@@ -4,27 +4,25 @@
 
 (defn new []
   @{:head nil
-    :tail nil
+    :last nil
     :size 0})
-
-(defn queue-empty? [queue]
-  (= (queue :size) 0))
 
 (defn enqueue [queue data]
   (let [n (node data)]
-    (if (nil? (queue :tail))
+    (update queue :size inc)
+    (if (nil? (queue :last))
       (do
         (put queue :head n)
-        (put queue :tail n))
+        (put queue :last n))
       (do
-        (put-in queue [:tail :next] n)
-        (put queue :tail n)))
-    (update queue :size inc)))
+        (put-in queue [:last :next] n)
+        (put queue :last n)))
+    (queue :size)))
 
 (defn dequeue [queue]
   (when-let [head (queue :head)]
-    (put queue :head (get-in queue [:head :next]))
     (update queue :size dec)
-    (when (queue-empty? queue)
-      (put queue :tail nil))
+    (put queue :head (get-in queue [:head :next]))
+    (when (zero? (queue :size))
+      (put queue :last nil))
     (head :data)))
