@@ -1,10 +1,12 @@
 # Janet Queue
 
+A queue data structure for Janet.
+
 `jpm install https://github.com/brandonchartier/janet-queue`
 
 ---
 
-```
+```janet
 (import queue)
 
 (def *queue* (queue/new))
@@ -34,3 +36,7 @@
 (assert (deep= d nil))
 (assert (deep= *queue* @{:size 0}))
 ```
+
+## License
+
+GPL-3.0

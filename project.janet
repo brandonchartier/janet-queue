@@ -2,7 +2,7 @@
   :name "queue"
   :description "A queue implementation"
   :author "Brandon Chartier"
-  :license "MIT"
+  :license "GPL-3.0"
   :url "https://github.com/brandonchartier/janet-queue"
   :repo "git+https://github.com/brandonchartier/janet-queue.git")
 
