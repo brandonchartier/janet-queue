@@ -9,32 +9,21 @@ A queue data structure for Janet.
 ```janet
 (import queue)
 
-(def *queue* (queue/new))
+(def q (queue/new))
 
-(queue/enqueue *queue* "a")
-(assert (deep= *queue* @{:size 1 :tail @{:data "a"} :head @{:data "a"}}))
+(queue/enqueue q "a")
+(queue/enqueue q "b")
+(queue/enqueue q "c")
 
-(queue/enqueue *queue* "b")
-(assert (deep= *queue* @{:size 2 :tail @{:data "b"} :head @{:data "a" :next @{:data "b"}}}))
+(queue/peek q)     # "a"
+(queue/empty? q)   # false
 
-(queue/enqueue *queue* "c")
-(assert (deep= *queue* @{:size 3 :tail @{:data "c"} :head @{:data "a" :next @{:data "b" :next @{:data "c"}}}}))
+(queue/dequeue q)  # "a"
+(queue/dequeue q)  # "b"
+(queue/dequeue q)  # "c"
+(queue/dequeue q)  # nil
 
-(def a (queue/dequeue *queue*))
-(assert (deep= a "a"))
-(assert (deep= *queue* @{:size 2 :tail @{:data "c"} :head @{:data "b" :next @{:data "c"}}}))
-
-(def b (queue/dequeue *queue*))
-(assert (deep= b "b"))
-(assert (deep= *queue* @{:size 1 :tail @{:data "c"} :head @{:data "c"}}))
-
-(def c (queue/dequeue *queue*))
-(assert (deep= c "c"))
-(assert (deep= *queue* @{:size 0}))
-
-(def d (queue/dequeue *queue*))
-(assert (deep= d nil))
-(assert (deep= *queue* @{:size 0}))
+(queue/empty? q)   # true
 ```
 
 ## License
